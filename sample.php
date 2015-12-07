@@ -19,6 +19,7 @@
 */
 
 require_once('TheTVDB.class.php');
+include('helper.class.php');
 
 // Replace your API key here (Require)
 $api = new TheTVDB("ABCDEF0123456789");
@@ -33,9 +34,9 @@ echo
 
 echo '<br>'; echo '<br>'; echo '--------------------------------------------------------------------------------------------------------- SEARCH SERIES EXAMPLE ---------------------------------------------------------------------------------------------------------'; echo '<br>';
 // Search series name with 'Overlord'
-$search_series_result_all = $api->search_series('Overlord');
+$search_series_result_all = $api->search_series('Gakusen Toshi Asterisk');
 // Search series name with 'Overlord' and get result index 1 (First result)
-$search_series_result_specific = $api->search_series('Overlord', 1);
+$search_series_result_specific = $api->search_series('Gakusen Toshi Asterisk', 1);
 // Set series id to variable to get series data
 $series_id = $search_series_result_specific->seriesid;
 // Print search result
@@ -48,5 +49,12 @@ $series_full = $api->get_series_data($series_id, true);
 $series_sample = $api->get_series_data($series_id, false);
 // Print Series data
 echo json_encode($series_full);
-
+echo '<br>'; echo '<br>'; echo '---------------------------------------------------------------------------------------------------------- GET IMAGE SAMPLE -----------------------------------------------------------------------------------------------------------'; echo '<br>';
+// Print Series images
+$banner = sprintf("%s/banners/_cache/%s",$mirror->Mirror->mirrorpath, $series_full->Series->banner);
+$fanart = sprintf("%s/banners/_cache/%s",$mirror->Mirror->mirrorpath, $series_full->Series->fanart);
+$poster = sprintf("%s/banners/_cache/%s",$mirror->Mirror->mirrorpath, $series_full->Series->poster);
+echo sprintf("<img src='%s'></img>", $poster);
+echo sprintf("<img src='%s'></img>", $fanart);
+echo sprintf("<img src='%s'></img>", $banner);
 ?>

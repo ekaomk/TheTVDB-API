@@ -41,13 +41,16 @@ class TheTVDB{
     $mirror_url = $this->get_mirror()->Mirror->mirrorpath;
     switch (count(func_get_args())) {
       case 1:
-      return $this->get_data_object(sprintf($this->search_series_url, $mirror_url, func_get_args()[0]));
+      return $this->get_data_object(sprintf($this->search_series_url, $mirror_url, urlencode(func_get_args()[0])));
       break;
 
       case 2: {
         $index = func_get_args()[1] - 1;
-        $result = $this->get_data_object(sprintf($this->search_series_url, $mirror_url, func_get_args()[0]));
+        $result = $this->get_data_object(sprintf($this->search_series_url, $mirror_url, urlencode(func_get_args()[0])));
+        if(is_array($result->Series))
         return $result->Series[$index];
+        else
+        return $result->Series;
       }
       break;
 
