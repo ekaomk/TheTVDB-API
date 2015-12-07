@@ -40,7 +40,7 @@ $search_series_result_specific = $api->search_series('Gakusen Toshi Asterisk', 1
 // Set series id to variable to get series data
 $series_id = $search_series_result_specific->seriesid;
 // Print search result
-echo json_encode($search_series_result_specific);
+Helper::debug($search_series_result_specific);
 
 echo '<br>'; echo '<br>'; echo '------------------------------------------------------------------------------------------------------- GET SERIES DATA EXAMPLE -------------------------------------------------------------------------------------------------------'; echo '<br>';
 // Get full series data
@@ -48,7 +48,7 @@ $series_full = $api->get_series_data($series_id, true);
 // Get sample series data
 $series_sample = $api->get_series_data($series_id, false);
 // Print Series data
-echo json_encode($series_full);
+Helper::debug($series_full);
 echo '<br>'; echo '<br>'; echo '---------------------------------------------------------------------------------------------------------- GET IMAGE SAMPLE -----------------------------------------------------------------------------------------------------------'; echo '<br>';
 // Print Series images
 $banner = sprintf("%s/banners/_cache/%s",$mirror->Mirror->mirrorpath, $series_full->Series->banner);
